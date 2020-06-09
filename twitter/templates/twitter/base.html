@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aplikacja a la Twitter - {% block title %}{% endblock %}</title>
+</head>
+<body>
+{% block menu %}
+    MENU:
+    <a href="{% url 'main-page' %}">Strona główna</a> |
+    {% if user.is_authenticated %}
+        Zalogowany jako: <a href="{% url 'edit-user' %}">{{ request.user.username }}</a>
+    | <a href="{% url 'messages' %}">Wiadomości</a>
+        | <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'login' %}">Logowanie</a>
+    {% endif %}
+{% endblock %}
+<hr>
+{% block content %}
+
+{% endblock %}
+</body>
+</html>

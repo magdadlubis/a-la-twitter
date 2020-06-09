@@ -1,0 +1,48 @@
+{% extends 'twitter/base.html' %}
+
+{% block title %}strona wpisu{% endblock %}
+
+{% block content %}
+
+<table border="1" width="500">
+    <tr>
+        <tr>
+            <th>Wpis</th>
+            <td>
+                {{ tweet.content }}
+            </td>
+        </tr>
+        <tr>
+            <th>Autor</th>
+            <td><a href="{% url 'user' tweet.user.pk %}">{% if tweet.user.first_name %}
+                {{ tweet.user.first_name }}
+                {% else %}
+                {{ tweet.user.username }}
+                {% endif %}
+            </a></td>
+        </tr>
+        <tr>
+            <th>Komentarze ({{ tweet.comment_set.all.count }})</th>
+        </tr>
+        {% for comment in comments %}
+            <tr>
+                <td>
+                    {{ comment.user.username }}
+                </td>
+                <td>
+                    {{ comment.comment }}
+                </td>
+            </tr>
+
+        {% endfor %}
+    </tr>
+    </table>
+    {% if request.user.is_authenticated %}
+    <form method="POST">
+    {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Skomentuj">
+    </form>
+    {% endif %}
+
+{% endblock %}

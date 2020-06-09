@@ -1,0 +1,13 @@
+{% extends 'twitter/base.html' %}
+
+{% block title %}logowanie użytkownika{% endblock %}
+
+{% block content %}
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Zaloguj">
+    </form><br>
+    <a href="{% url 'add-user' %}">Zarejestruj się</a><br><br>
+    {{ msg }}
+{% endblock %}

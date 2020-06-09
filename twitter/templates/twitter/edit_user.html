@@ -1,0 +1,12 @@
+{% extends 'twitter/base.html' %}
+
+{% block title %}edytowanie użytkownika{% endblock %}
+
+{% block content %}
+    <form method="post">
+    {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Zmień">
+    </form><br>
+    {{ msg }}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'twitter/base.html' %}
+
+{% block title %}strona wiadomości{% endblock %}
+
+{% block content %}
+
+<table border="1" width="500">
+        <tr>
+            <th>Nadawca</th>
+            <td>
+                {{ message.sender }}
+            </td>
+        </tr>
+        <tr>
+            <th>Odbiorca</th>
+            <td>
+                {{ message.to }}
+            </td>
+        </tr>
+        <tr>
+            <th>Wiadomość</th>
+            <td>{{ message.message }}</td>
+        </tr>
+    </table><br>
+    <a href="{% url 'messages' %}">Powrót do wszystkich wiadomości</a>
+
+{% endblock %}

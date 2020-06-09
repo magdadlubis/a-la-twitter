@@ -1,0 +1,45 @@
+{% extends 'twitter/base.html' %}
+
+{% block title %}strona główna{% endblock %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <input type='submit' value="Dodaj tweeta">
+    </form>
+    {% endif %}
+    <br>
+        {% for tweet in tweets %}
+            <table border="1" width="500">
+    <tr>
+
+        <tr>
+            <th>Użytkownik</th>
+            <td><a href="{% url 'user' tweet.user.pk %}">{% if tweet.user.first_name %}
+                {{ tweet.user.first_name }}
+                {% else %}
+                {{ tweet.user.username }}
+                {% endif %}
+            </a></td>
+        </tr>
+        <tr>
+            <th>Data wpisu</th>
+            <td>{{ tweet.creation_date }}</td>
+        </tr>
+        <tr>
+            <th>Wpis</th>
+            <td>
+                {{ tweet.content }}
+                <hr>
+                Liczba komentarzy: {{ tweet.comment_set.all.count }} |
+                <a href="{% url 'tweet' tweet.pk %}">Zobacz wpis</a>
+            </td>
+        </tr>
+
+    </tr>
+    </table><br>
+            {% endfor %}
+    <p><a href="{% url 'add-tweet' %}">Dodaj wpis</a></p>
+{% endblock %}

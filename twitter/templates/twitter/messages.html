@@ -1,0 +1,47 @@
+{% extends 'twitter/base.html' %}
+
+{% block title %}wiadomości{% endblock %}
+
+{% block content %}
+        <table border="1" width="600">
+    <tr>
+        <th>Wiadomości wysłane</th>
+    </tr>
+    <tr>
+        <th>Odbiorca</th>
+        <th>Data wysłania</th>
+        <th>Wiadomość</th>
+    </tr>
+    {% for message in sent %}
+    <tr>
+        <td>{{ message.to }}</td>
+        <td>{{ message.date }}</td>
+        <td><a href="{% url 'message' message.pk %}">{{ message.message|truncatechars:30 }}</a></td>
+    </tr>
+    {% endfor %}
+</table>
+    <br>
+<table border="1" width="600">
+    <tr>
+        <th>Wiadomości odebrane</th>
+    </tr>
+    <tr>
+        <th>Nadawca</th>
+        <th>Data wysłania</th>
+        <th>Wiadomość</th>
+        <th>Status</th>
+    </tr>
+    {% for message in received %}
+    <tr>
+        <td>{{ message.sender }}</td>
+        <td>{{ message.date }}</td>
+        <td><a href="{% url 'message' message.pk %}">{{ message.message|truncatechars:30 }}</a></td>
+        {% if message.read == False %}
+            <td><b><font color="red">Nowa</font></b></td>
+        {% else %}
+            <td>Przeczytana</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'twitter/base.html' %}
+
+{% block title %}rejestrowanie użytkownika{% endblock %}
+
+{% block content %}
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Zarejestruj">
+    </form><br>
+    {{ msg }}
+{% endblock %}
